@@ -1,6 +1,6 @@
 # PSDapper PowerShell Module
 
-A PowerShell module for working with SQL databases using Dapper-like commands. Provides easy commands for creating connections, selecting data, and executing SQL commands.
+An extremely easy to use PowerShell module for working with SQL databases using Dapper. Provides easy commands for creating connections, selecting data, and executing SQL commands with minimal dependencies.
 
 ## Installation
 
