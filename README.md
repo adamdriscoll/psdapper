@@ -31,7 +31,7 @@ Executes a SQL command (INSERT, UPDATE, DELETE) and returns the number of affect
 
 **Usage:**
 ```powershell
-Invoke-DapperSqlCommand -Connection $connection -Command "UPDATE Users SET Name = @Name WHERE Id = @Id" -Parameters @{ Name = 'John'; Id = 1 }
+Invoke-DapperCommand -Connection $connection -Command "UPDATE Users SET Name = @Name WHERE Id = @Id" -Parameters @{ Name = 'John'; Id = 1 }
 ```
 
 ## Error Handling
