@@ -25,14 +25,19 @@ function Select-DapperObject {
         [Parameter(Mandatory)]
         [string]$Query,
         [Parameter()]
-        [hashtable]$Parameters
+        [Hashtable]$Parameters
     )
     try {
         $dapperDll = Join-Path $PSScriptRoot 'Dapper.dll'
         Add-Type -Path $dapperDll
         $dapperType = [System.Reflection.Assembly]::LoadFrom($dapperDll).GetType('Dapper.SqlMapper')
         if ($Parameters) {
-            $Rows = $dapperType::Query($Connection, $Query, $Parameters)
+            # Convert hashtable to Dictionary<string, object>
+            $dict = New-Object 'System.Collections.Generic.Dictionary[string,object]'
+            foreach ($key in $Parameters.Keys) {
+                $dict.Add([string]$key, $Parameters[$key])
+            }
+            $Rows = $dapperType::Query($Connection, $Query, $dict)
         } else {
             $Rows = $dapperType::Query($Connection, $Query)
         }
@@ -107,7 +112,12 @@ function Invoke-DapperCommand {
         Add-Type -Path $dapperDll
         $dapperType = [System.Reflection.Assembly]::LoadFrom($dapperDll).GetType('Dapper.SqlMapper')
         if ($Parameters) {
-            $affectedRows = $dapperType::Execute($Connection, $Command, $Parameters)
+            # Convert hashtable to Dictionary<string, object>
+            $dict = New-Object 'System.Collections.Generic.Dictionary[string,object]'
+            foreach ($key in $Parameters.Keys) {
+                $dict.Add([string]$key, $Parameters[$key])
+            }
+            $affectedRows = $dapperType::Execute($Connection, $Command, $dict)
         } else {
             $affectedRows = $dapperType::Execute($Connection, $Command)
         }
