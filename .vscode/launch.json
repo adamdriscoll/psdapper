@@ -1,0 +1,15 @@
+{
+    // Use PowerShell launch configuration to debug and load the module
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "PowerShell",
+            "request": "launch",
+            "name": "Debug psdapper Module",
+            "script": "${workspaceFolder}/.vscode/Debug-LoadModule.ps1",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build psdapper"
+        }
+    ]
+}
