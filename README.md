@@ -4,11 +4,9 @@ A PowerShell module for working with SQL databases using Dapper-like commands. P
 
 ## Installation
 
-1. Copy the `psdapper` folder to your PowerShell modules directory (e.g., `$env:USERPROFILE\Documents\WindowsPowerShell\Modules`).
-2. Import the module:
-   ```powershell
-   Import-Module psdapper
-   ```
+```powershell
+Install-PSResource -Name PSDapper -Repository PSGallery
+```
 
 ## Commands
 
@@ -20,12 +18,12 @@ Creates and opens a SQL connection.
 $connection = New-DapperConnection -ConnectionString "Server=.;Database=Test;Trusted_Connection=True;"
 ```
 
-### Select-DapperData
-Executes a SQL SELECT query and returns results as a DataTable.
+### Select-DapperObject
+Executes a SQL SELECT query and returns results.
 
 **Usage:**
 ```powershell
-Select-DapperData -Connection $connection -Query "SELECT * FROM Users WHERE Id = @Id" -Parameters @{ Id = 1 }
+Select-DapperObject -Connection $connection -Query "SELECT * FROM Users WHERE Id = @Id" -Parameters @{ Id = 1 }
 ```
 
 ### Invoke-DapperSqlCommand
@@ -46,5 +44,3 @@ Each command includes built-in help. Use `Get-Help <CommandName>` for details an
 Pester unit tests are recommended for validating command functionality.
 
 ---
-
-© 2025 Your Name. Licensed under MIT.
